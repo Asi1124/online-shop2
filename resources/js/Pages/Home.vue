@@ -7,6 +7,11 @@
 	import Header from '@/Components/Header.vue';
 	import Footer from '@/Components/Footer.vue';
 	import { Link } from '@inertiajs/vue3';
+	import { id } from 'postcss-selector-parser';
+	const props = defineProps({
+		Recomindations: Array,
+        Photos: Object,
+	});
 </script>
 
 <template>
@@ -35,10 +40,12 @@
 				</h2>
 			</div>
 			<div class="flex justify-between gap-5 w-full mt-5">
-				<card />
-				<card />
-				<card />
-				<card />
+				<div v-for="Recomindation in Recomindations">
+					<card
+                        :name="Recomindation.name"
+                        :price="Recomindation.price"
+                    />
+				</div>
 			</div>
 		</div>
 		<div class="mt-5">
@@ -48,11 +55,14 @@
 					Best selling of the month
 				</h2>
 			</div>
+			<div v-for="product in products"><br />{{ product.name }}</div>
 			<div class="flex justify-between gap-5 w-full mt-5">
-				<a href="/shop"><card /></a>
-				<card />
-				<card />
-				<card />
+                <div v-for="Recomindation in Recomindations">
+                    <card
+                        :name="Recomindation.name"
+                        :price="Recomindation.price"
+                    />
+                </div>
 			</div>
 		</div>
 		<div>

@@ -21,9 +21,9 @@ class AdminController extends Controller
             'price' => ['required', 'max:50'],
         ]));
         if ($request->hasfile('images')) {
-            dd($request);
-                $name = ($request->file('images')->getClientOriginalName());
-                $request->file('images')->move(public_path() . '/uploads/', $name);
+            foreach ($request->file('images') as $file) {
+                $name = ($file->getClientOriginalName());
+                $file->move(public_path() . '/uploads/', $name);
                 $fileModal = new ProductImages();
                 $fileModal->name = $name;
                 $fileModal->image_path = (public_path() . '/uploads/'. $name);
@@ -31,7 +31,7 @@ class AdminController extends Controller
                 $fileModal->save();
                 $name = null;
 
-
+            }
         }
 
     }

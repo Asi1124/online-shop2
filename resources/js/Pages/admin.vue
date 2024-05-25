@@ -6,18 +6,21 @@
 		name: null,
 		description: null,
 		price: null,
-		images: null,
+		images: [],
 	});
 
 	function submit() {
 		form.post('/adminCreate');
+	}
+
+	function handleFileUpload(event) {
+		form.images = Array.from(event.target.files);
 	}
 </script>
 
 <template>
 	<form
 		enctype="multipart/form-data"
-		qwdasd
 		@submit.prevent="submit"
 	>
 		<label for="name">name:</label>
@@ -42,7 +45,7 @@
 			id="images"
 			multiple="multiple"
 			type="file"
-			@input="form.images = $event.target.files[0]"
+			@change="handleFileUpload"
 		/>
 		<button
 			class="bg-blue-400"
